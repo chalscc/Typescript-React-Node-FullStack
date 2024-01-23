@@ -1,26 +1,20 @@
-import { useForm } from '../../../../hooks/useForm'
 import { OperationData } from './OperationData';
-
+import { useAppSelector, useAppDispatch, useForm } from '../../../../hooks'
+import { addOperation } from '../../../../store/slices/operations/operationsSlice';
 import { TextField, Container, Typography, FormControlLabel, Switch, Button } from '@mui/material';
 
 export const Form = () => {
 
-  const { name, description, isActive, formData, resetState, handleChange } = useForm<OperationData>({
-    name: '',
-    description: '',
-    isActive: false,
-    createdAt: new Date()
-  });
+  const { operation, allOperations } = useAppSelector((state) => state.operations)
+  const dispatch = useAppDispatch()
 
-  const addOperation = (e: React.FormEvent<HTMLFormElement>) => {
+  const { name, description, isActive, formData, resetState, handleChange } = useForm<OperationData>(operation); // operation es el DefaultValue
+
+  const submitOperation = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const updatedFormData = {
-      ...formData,
-      createdAt: new Date(),
-    };
+    dispatch(addOperation(formData));
 
-    console.log(updatedFormData);
     resetState();
   }
 
@@ -29,7 +23,7 @@ export const Form = () => {
       <Typography component="h1" variant="h5">
         Añadir operación
       </Typography>
-      <form onSubmit={addOperation}>
+      <form onSubmit={submitOperation}>
         <TextField
           variant="outlined"
           margin="normal"
@@ -65,7 +59,7 @@ export const Form = () => {
           Añadir
         </Button>
 
-        <pre>{JSON.stringify(formData, null, 2)}</pre>
+        <pre>{JSON.stringify(allOperations, null, 2)}</pre>
       </form>
     </Container>
   );
