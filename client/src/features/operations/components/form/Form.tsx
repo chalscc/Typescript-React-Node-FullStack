@@ -1,11 +1,10 @@
-import { IOperationData } from '../../types/OperationData';
+import { IOperationData, IMarketersData } from '../../../../interfaces';
 import { useAppSelector, useAppDispatch, useForm } from '../../../../hooks'
 import { addOperation } from '../../../../store/slices/operations/operationsSlice';
 import { TextField, Container, Typography, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useEffect } from 'react';
 import MarketersService from '../../../../services/marketersService';
 import { setMarketers } from '../../../../store/slices/marketers/marketersSlice';
-import { IMarketersData } from '../../../marketers/types/MarketersData';
 
 export const Form = () => {
 
@@ -39,7 +38,6 @@ export const Form = () => {
 
     getMarketers();
   }, []);
-
 
 
   return (

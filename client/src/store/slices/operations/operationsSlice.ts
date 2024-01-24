@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IOperationData } from '../../../features/operations/types/OperationData';
+import { IOperationData } from '../../../interfaces';
 
 export const operationsSlice = createSlice({
   name: 'operations',

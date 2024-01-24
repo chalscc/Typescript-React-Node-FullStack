@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IMarketersData } from '../../../features/marketers/types/MarketersData';
+import { IMarketersData } from '../../../interfaces';
 
 export const marketersSlice = createSlice({
   name: 'operations',

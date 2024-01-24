@@ -1,5 +1,5 @@
 import http from "../config/http-common";
-import { IMarketersData } from "../features/marketers/types/MarketersData";
+import { IMarketersData } from "../interfaces";
 import { AxiosResponse } from 'axios';
 
 
