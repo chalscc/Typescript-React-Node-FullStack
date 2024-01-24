@@ -3,22 +3,22 @@ import { OperationsController } from "./controller/OperationsController"
 
 export const Routes = [{
   method: "get",
-  route: "/operations",
+  route: "/api/operations",
   controller: OperationsController,
   action: "all"
 }, {
   method: "post",
-  route: "/operations",
+  route: "/api/operations",
   controller: OperationsController,
   action: "save"
 }, {
   method: "delete",
-  route: "/operations/:id",
+  route: "/api/operations/:id",
   controller: OperationsController,
   action: "remove"
 }, {
   method: "get",
-  route: "/marketers",
+  route: "/api/marketers",
   controller: MarketersController,
   action: "all"
 },

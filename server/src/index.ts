@@ -9,7 +9,11 @@ AppDataSource.initialize().then(async () => {
 
   // create express app
   const app = express()
+  const cors = require("cors");
+
   app.use(bodyParser.json())
+
+  app.use(cors());
 
   // register express routes from defined application routes
   Routes.forEach(route => {
@@ -30,18 +34,18 @@ AppDataSource.initialize().then(async () => {
   const marketers = ['Naturgy', 'Endesa', 'Repsol', 'Iberdrola', 'Axpo', 'Cepsa']
 
   AppDataSource.getRepository(Marketers).count().then(async c => {
-    c === 0 &&
+    if (c > 0) return;
     console.log('Markers database is empty, inserting data...')
-      await AppDataSource.manager.save(
-        marketers.map(name => {
-          return AppDataSource.manager.create(Marketers, {
-            name,
-          })
+    await AppDataSource.manager.save(
+      marketers.map(name => {
+        return AppDataSource.manager.create(Marketers, {
+          name,
         })
-      )
-      
+      })
+    )
+
   });
 
-  console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results")
+  console.log("Express server has started on port 3000. Open http://localhost:3000/marketers to see results")
 
 }).catch(error => console.log(error))
