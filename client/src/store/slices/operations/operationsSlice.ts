@@ -12,14 +12,15 @@ export const operationsSlice = createSlice({
     allOperations: [] as OperationData[],
   },
   reducers: {
-    addOperation: (state, action: PayloadAction<OperationData>) => {
-      
+    addOperation: (state, action: PayloadAction<OperationData>) => {      
       state.allOperations.push(action.payload);
+    },
 
-      console.log(state.allOperations)
+    removeOperation: (state, action: PayloadAction<OperationData>) => {      
+      state.allOperations = state.allOperations.filter(operation => operation.name !== action.payload.name);      
     },
   },
 })
 
 
-export const { addOperation } = operationsSlice.actions
+export const { addOperation, removeOperation } = operationsSlice.actions

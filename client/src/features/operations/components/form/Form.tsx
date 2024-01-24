@@ -20,8 +20,8 @@ export const Form = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Typography component="h1" variant="h5">
-        Añadir operación
+      <Typography component="h1" variant="h5" align='center'>
+        Formulario de operaciones
       </Typography>
       <form onSubmit={submitOperation}>
         <TextField
