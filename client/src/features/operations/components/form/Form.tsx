@@ -1,14 +1,18 @@
-import { OperationData } from './OperationData';
+import { IOperationData } from '../../types/OperationData';
 import { useAppSelector, useAppDispatch, useForm } from '../../../../hooks'
 import { addOperation } from '../../../../store/slices/operations/operationsSlice';
 import { TextField, Container, Typography, FormControlLabel, Switch, Button } from '@mui/material';
+import { useEffect } from 'react';
+import MarketersService from '../../../../services/marketersService';
+import { setMarketers } from '../../../../store/slices/marketers/marketersSlice';
+import { IMarketersData } from '../../../marketers/types/MarketersData';
 
 export const Form = () => {
 
   const { operation, allOperations } = useAppSelector((state) => state.operations)
   const dispatch = useAppDispatch()
 
-  const { name, description, isActive, formData, resetState, handleChange } = useForm<OperationData>(operation); // operation es el DefaultValue
+  const { name, description, isActive, formData, resetState, handleChange } = useForm<IOperationData>(operation); // operation es el DefaultValue
 
   const submitOperation = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,6 +21,18 @@ export const Form = () => {
 
     resetState();
   }
+
+  useEffect(() => {
+
+    const getMarketers = async () => {
+      const marketers: IMarketersData[] | undefined = await MarketersService.getAll();
+      if (marketers) dispatch(setMarketers(marketers));
+    }
+
+    getMarketers();
+  }, []);
+
+
 
   return (
     <Container component="main" maxWidth="xs">

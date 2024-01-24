@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { OperationData } from '../../../features/operations/components/form/OperationData';
+import { IOperationData } from '../../../features/operations/types/OperationData';
 
 export const operationsSlice = createSlice({
   name: 'operations',
@@ -9,14 +9,14 @@ export const operationsSlice = createSlice({
       description: '',
       isActive: false,
     },
-    allOperations: [] as OperationData[],
+    allOperations: [] as IOperationData[],
   },
   reducers: {
-    addOperation: (state, action: PayloadAction<OperationData>) => {      
+    addOperation: (state, action: PayloadAction<IOperationData>) => {      
       state.allOperations.push(action.payload);
     },
 
-    removeOperation: (state, action: PayloadAction<OperationData>) => {      
+    removeOperation: (state, action: PayloadAction<IOperationData>) => {      
       state.allOperations = state.allOperations.filter(operation => operation.name !== action.payload.name);      
     },
   },
