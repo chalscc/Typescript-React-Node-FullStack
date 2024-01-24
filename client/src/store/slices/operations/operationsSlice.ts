@@ -7,7 +7,8 @@ export const operationsSlice = createSlice({
     operation: {
       name: '',
       description: '',
-      isActive: false,
+      marketer_id: 0,
+      client_id: 0,
     },
     allOperations: [] as IOperationData[],
   },

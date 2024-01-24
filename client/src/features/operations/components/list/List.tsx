@@ -7,6 +7,8 @@ import { removeOperation } from '../../../../store/slices/operations/operationsS
 export const List = () => {
 
   const { allOperations } = useAppSelector((state) => state.operations)
+  const { allMarketers } = useAppSelector((state) => state.marketers)
+
   const dispatch = useAppDispatch()
 
 
@@ -28,7 +30,7 @@ export const List = () => {
                 Nombre: {operation.name}
               </span>
               <IconButton
-              onClick={() => dispatch(removeOperation(operation))}
+                onClick={() => dispatch(removeOperation(operation))}
               >
                 <DeleteIcon />
               </IconButton>
@@ -38,7 +40,10 @@ export const List = () => {
               Descripción: {operation.description}
             </Typography>
             <Typography variant="body2">
-              Estado: {operation.isActive ? 'Activa' : 'Inactiva'}
+              Descripción: {allMarketers.find(marketer => marketer.id === operation.marketer_id)?.name}
+            </Typography>
+            <Typography variant="body2">
+              Descripción: {allMarketers.find(marketer => marketer.id === operation.client_id)?.name}
             </Typography>
           </CardContent>
         </Card>
