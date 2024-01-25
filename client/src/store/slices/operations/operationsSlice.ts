@@ -5,10 +5,17 @@ export const operationsSlice = createSlice({
   name: 'operations',
   initialState: {
     operation: {
+      id: 0,
       name: '',
       description: '',
-      marketer_id: 0,
-      client_id: 0,
+      marketer: {
+        id: 0,
+        name: '',
+      },
+      client: {
+        id: 0,
+        name: '',
+      },
       type: 'compra',
       amount: 0,
       price: 0,
@@ -16,16 +23,16 @@ export const operationsSlice = createSlice({
     allOperations: [] as IOperationData[],
   },
   reducers: {
-    addOperation: (state, action: PayloadAction<IOperationData>) => {      
+    addOperation: (state, action: PayloadAction<IOperationData>) => {
       state.allOperations.push(action.payload);
     },
 
-    setOperations: (state, action: PayloadAction<IOperationData[]>) => {      
+    setOperations: (state, action: PayloadAction<IOperationData[]>) => {
       state.allOperations = action.payload;
     },
 
     removeOperation: (state, action: PayloadAction<number>) => {
-      state.allOperations = state.allOperations.filter(operation => operation.id !== action.payload);      
+      state.allOperations = state.allOperations.filter(operation => operation.id !== action.payload);
     },
   },
 })

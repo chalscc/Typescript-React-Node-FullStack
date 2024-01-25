@@ -113,7 +113,7 @@ export const Form = () => {
             labelId="id-label-marketer"
             id="id-select-marketer"
             required
-            value={formData.marketer_id !== 0 ? formData.marketer_id : ""}
+            value={formData.marketer.id !== 0 ? formData.marketer.id : ""}
             label="Marketer"
             name='marketer_id'
             onChange={handleSelectChange}
@@ -133,7 +133,7 @@ export const Form = () => {
             id="id-select-client"
             name='client_id'
             required
-            value={formData.client_id !== 0 ? formData.client_id : ""}
+            value={formData.client.id !== 0 ? formData.client.id : ""}
             label="Cliente"
             onChange={handleSelectChange}
           >
