@@ -24,8 +24,8 @@ export const operationsSlice = createSlice({
       state.allOperations = action.payload;
     },
 
-    removeOperation: (state, action: PayloadAction<IOperationData>) => {      
-      state.allOperations = state.allOperations.filter(operation => operation.name !== action.payload.name);      
+    removeOperation: (state, action: PayloadAction<number>) => {
+      state.allOperations = state.allOperations.filter(operation => operation.id !== action.payload);      
     },
   },
 })

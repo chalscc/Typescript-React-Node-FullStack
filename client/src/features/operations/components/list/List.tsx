@@ -3,7 +3,7 @@ import { Card, CardContent, Divider, Container, Typography, IconButton } from '@
 import DeleteIcon from '@mui/icons-material/Delete';
 import { removeOperation, setOperations } from '../../../../store/slices/operations/operationsSlice';
 import { useEffect } from 'react';
-import { IOperationData } from '../../../../interfaces';
+import { IDeleteResponse, IOperationData } from '../../../../interfaces';
 import operationsService from '../../../../services/operationsService';
 
 
@@ -26,6 +26,12 @@ export const List = () => {
     if (operations) dispatch(setOperations(operations));
   }
 
+  const delteOperation = async (id: number) => {
+    
+    const operation: IDeleteResponse | undefined = await operationsService.deleteOne(id);    
+    if (operation && operation.success) dispatch(removeOperation(operation.id));
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <Typography component="h1" variant="h5" align='center'>
@@ -33,8 +39,6 @@ export const List = () => {
       </Typography>
 
       {allOperations.map((operation) => (
-        console.log(operation),
-
         <Card key={operation.id} sx={{ margin: '10px 0' }}>
           <CardContent>
             <Typography
@@ -45,7 +49,7 @@ export const List = () => {
                 Nombre: {operation.name}
               </span>
               <IconButton
-                onClick={() => dispatch(removeOperation(operation))}
+                onClick={() => delteOperation(operation.id)}
               >
                 <DeleteIcon />
               </IconButton>

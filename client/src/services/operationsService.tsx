@@ -1,5 +1,5 @@
 import http from "../config/http-common";
-import { IOperationData } from "../interfaces";
+import { IDeleteResponse, IOperationData } from "../interfaces";
 import { AxiosResponse } from 'axios';
 
 
@@ -25,9 +25,21 @@ const addOne = async (operation: IOperationData) => {
   }
 }
 
+const deleteOne = async (id: number) => {
+  try {
+    const response: AxiosResponse = await http.delete(`/operations/${id}`);
+    const responseData: IDeleteResponse = response.data;
+
+    return responseData;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const MarketersService = {
   getAll,
-  addOne
+  addOne,
+  deleteOne
 };
 
 export default MarketersService;
