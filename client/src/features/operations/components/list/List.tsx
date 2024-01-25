@@ -10,7 +10,6 @@ import operationsService from '../../../../services/operationsService';
 export const List = () => {
 
   const { allOperations } = useAppSelector((state) => state.operations)
-  const { allMarketers } = useAppSelector((state) => state.marketers)
 
   const dispatch = useAppDispatch()
 

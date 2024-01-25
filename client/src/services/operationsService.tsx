@@ -16,9 +16,12 @@ const getAll = async () => {
 
 const addOne = async (operation: IOperationData) => {
   try {
+    console.log(operation)
     const response: AxiosResponse = await http.post('/operations', operation);
     const responseData: IOperationData = response.data;
 
+
+    console.log(responseData)
     return responseData;
   } catch (error) {
     console.error(error);

@@ -41,8 +41,11 @@ export const Form = () => {
   }  
 
 
-  const saveOperation = async () => {
+  const saveOperation = async () => { 
     const operation: IOperationData | undefined = await operationsService.addOne(formData);
+
+    console.log(operation)
+
     if (operation) dispatch(addOperation(operation));
   }
 
@@ -115,7 +118,7 @@ export const Form = () => {
             required
             value={formData.marketer.id !== 0 ? formData.marketer.id : ""}
             label="Marketer"
-            name='marketer_id'
+            name='marketer'
             onChange={handleSelectChange}
           >
             {allMarketers.map(({ id, name }) => (
@@ -131,14 +134,14 @@ export const Form = () => {
           <Select
             labelId="id-label-client"
             id="id-select-client"
-            name='client_id'
+            name='client'
             required
             value={formData.client.id !== 0 ? formData.client.id : ""}
             label="Cliente"
             onChange={handleSelectChange}
           >
             {allMarketers.map(({ id, name }) => (
-              <MenuItem key={id} value={id}>
+              <MenuItem key={id} value={id} >
                 {name}
               </MenuItem>
             ))}
@@ -154,7 +157,7 @@ export const Form = () => {
             Tipo:
           </Typography>
           <FormControl>
-            <RadioGroup value={type} onChange={handleRadioChange} row>
+            <RadioGroup value={type} name='type' onChange={handleRadioChange} row>
               <FormControlLabel value="compra" control={<Radio />} label="Compra" />
               <FormControlLabel value="venta" control={<Radio />} label="Venta" />
             </RadioGroup>
