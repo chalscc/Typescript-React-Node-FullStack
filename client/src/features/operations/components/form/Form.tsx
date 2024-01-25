@@ -24,7 +24,7 @@ export const Form = () => {
     handleInputChange,
     handleRadioChange,
     handleSelectChange
-  } = useForm<IOperationData>(operation); // operation es el DefaultValue
+  } = useForm(operation); // operation es el DefaultValue
 
   useEffect(() => {
 
