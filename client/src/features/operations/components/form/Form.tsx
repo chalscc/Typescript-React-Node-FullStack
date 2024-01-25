@@ -5,6 +5,7 @@ import { TextField, Container, Typography, Button, FormControl, InputLabel, Sele
 import { useEffect } from 'react';
 import MarketersService from '../../../../services/marketersService';
 import { setMarketers } from '../../../../store/slices/marketers/marketersSlice';
+import operationsService from '../../../../services/operationsService';
 
 export const Form = () => {
 
@@ -25,23 +26,31 @@ export const Form = () => {
     handleSelectChange
   } = useForm<IOperationData>(operation); // operation es el DefaultValue
 
+  useEffect(() => {
+
+    getMarketers();
+
+  }, []);
+  
   const submitOperation = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(addOperation(formData));
+    saveOperation();
 
     resetState();
+  }  
+
+
+  const saveOperation = async () => {
+    const operation: IOperationData | undefined = await operationsService.addOne(formData);
+    console.log(operation)
+    if (operation) dispatch(addOperation(operation));
   }
 
-  useEffect(() => {
-
-    const getMarketers = async () => {
-      const marketers: IMarketersData[] | undefined = await MarketersService.getAll();
-      if (marketers) dispatch(setMarketers(marketers));
-    }
-
-    getMarketers();
-  }, []);
+  const getMarketers = async () => {
+    const marketers: IMarketersData[] | undefined = await MarketersService.getAll();
+    if (marketers) dispatch(setMarketers(marketers));
+  }
 
 
   return (
@@ -152,7 +161,7 @@ export const Form = () => {
             </RadioGroup>
           </FormControl>
         </Box>
-        
+
         <Button type="submit" fullWidth variant="contained">
           Añadir
         </Button>

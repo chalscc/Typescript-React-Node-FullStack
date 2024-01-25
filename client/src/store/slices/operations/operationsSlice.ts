@@ -20,6 +20,10 @@ export const operationsSlice = createSlice({
       state.allOperations.push(action.payload);
     },
 
+    setOperations: (state, action: PayloadAction<IOperationData[]>) => {      
+      state.allOperations = action.payload;
+    },
+
     removeOperation: (state, action: PayloadAction<IOperationData>) => {      
       state.allOperations = state.allOperations.filter(operation => operation.name !== action.payload.name);      
     },
@@ -27,4 +31,4 @@ export const operationsSlice = createSlice({
 })
 
 
-export const { addOperation, removeOperation } = operationsSlice.actions
+export const { addOperation, removeOperation, setOperations } = operationsSlice.actions

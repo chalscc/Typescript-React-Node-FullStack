@@ -1,7 +1,10 @@
 import { useAppSelector, useAppDispatch } from '../../../../hooks'
 import { Card, CardContent, Divider, Container, Typography, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { removeOperation } from '../../../../store/slices/operations/operationsSlice';
+import { removeOperation, setOperations } from '../../../../store/slices/operations/operationsSlice';
+import { useEffect } from 'react';
+import { IOperationData } from '../../../../interfaces';
+import operationsService from '../../../../services/operationsService';
 
 
 export const List = () => {
@@ -11,6 +14,17 @@ export const List = () => {
 
   const dispatch = useAppDispatch()
 
+  useEffect(() => {
+
+    getOperations();
+
+  }, []);
+
+  const getOperations = async () => {
+    const operations: IOperationData[] | undefined = await operationsService.getAll();
+    
+    if (operations) dispatch(setOperations(operations));
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -19,8 +33,9 @@ export const List = () => {
       </Typography>
 
       {allOperations.map((operation) => (
+        console.log(operation),
 
-        <Card key={operation.name} sx={{ margin: '10px 0' }}>
+        <Card key={operation.id} sx={{ margin: '10px 0' }}>
           <CardContent>
             <Typography
               variant="h5"

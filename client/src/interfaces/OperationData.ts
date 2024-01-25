@@ -1,4 +1,5 @@
 export interface IOperationData  {
+  id: number,
   name: string,
   description: string,  
   marketer_id: number,
