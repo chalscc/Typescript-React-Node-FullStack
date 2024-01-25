@@ -15,6 +15,12 @@ export class Operations {
     @JoinColumn({ name: "client_id" })
     client: Marketers;
 
+    @Column()
+    name: string;
+
+    @Column()
+    description: string;
+
     @Column() // compra/venta
     type: string;
 
