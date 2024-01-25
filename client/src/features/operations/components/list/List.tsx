@@ -69,7 +69,7 @@ export const List = () => {
                 Cantidad: {operation.amount}
               </Typography>
               <Typography variant="body2" color="primary">
-                Precio: {operation.price}
+                Precio: {operation.price} €
               </Typography>
             </Box>
           </CardContent>

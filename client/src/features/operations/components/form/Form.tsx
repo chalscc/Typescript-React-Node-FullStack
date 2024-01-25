@@ -31,17 +31,17 @@ export const Form = () => {
     getMarketers();
 
   }, []);
-  
+
   const submitOperation = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     saveOperation();
 
     resetState();
-  }  
+  }
 
 
-  const saveOperation = async () => { 
+  const saveOperation = async () => {
     const operation: IOperationData | undefined = await operationsService.addOne(formData);
 
     console.log(operation)
@@ -108,6 +108,11 @@ export const Form = () => {
           value={amount}
           type='number'
           onChange={handleInputChange}
+          onKeyDownCapture={(event) => {
+            const forbiddenKeys = ['.', ',', 'e', '+', '-'];
+
+            if (forbiddenKeys.includes(event.key)) event.preventDefault();
+          }}
         />
 
         <FormControl fullWidth sx={{ marginBottom: '8px' }}>
