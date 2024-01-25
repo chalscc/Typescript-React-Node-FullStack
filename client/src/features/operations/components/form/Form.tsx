@@ -1,7 +1,7 @@
 import { IOperationData, IMarketersData } from '../../../../interfaces';
 import { useAppSelector, useAppDispatch, useForm } from '../../../../hooks'
 import { addOperation } from '../../../../store/slices/operations/operationsSlice';
-import { TextField, Container, Typography, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { TextField, Container, Typography, Button, FormControl, InputLabel, Select, MenuItem, InputAdornment, FormControlLabel, RadioGroup, Radio, Box } from '@mui/material';
 import { useEffect } from 'react';
 import MarketersService from '../../../../services/marketersService';
 import { setMarketers } from '../../../../store/slices/marketers/marketersSlice';
@@ -15,9 +15,13 @@ export const Form = () => {
   const {
     name,
     description,
+    type,
+    amount,
+    price,
     formData,
     resetState,
     handleInputChange,
+    handleRadioChange,
     handleSelectChange
   } = useForm<IOperationData>(operation); // operation es el DefaultValue
 
@@ -65,6 +69,36 @@ export const Form = () => {
           onChange={handleInputChange}
         />
 
+
+        <TextField
+          sx={{ marginBottom: '8px' }}
+          required
+          fullWidth
+          label="Precio"
+          name="price"
+          value={price}
+          type='number'
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="start">
+                €
+              </InputAdornment>
+            ),
+          }}
+          onChange={handleInputChange}
+        />
+
+        <TextField
+          sx={{ marginBottom: '8px' }}
+          required
+          fullWidth
+          label="Cantidad"
+          name="amount"
+          value={amount}
+          type='number'
+          onChange={handleInputChange}
+        />
+
         <FormControl fullWidth sx={{ marginBottom: '8px' }}>
           <InputLabel id="id-label-marketer">Marketer</InputLabel>
           <Select
@@ -101,8 +135,24 @@ export const Form = () => {
               </MenuItem>
             ))}
           </Select>
-        </FormControl>        
+        </FormControl>
 
+        <Box
+          display='flex'
+          flexDirection='row'
+          alignItems='center'
+        >
+          <Typography variant="h6" sx={{ marginBottom: '8px', marginRight: '20px' }}>
+            Tipo:
+          </Typography>
+          <FormControl>
+            <RadioGroup value={type} onChange={handleRadioChange} row>
+              <FormControlLabel value="compra" control={<Radio />} label="Compra" />
+              <FormControlLabel value="venta" control={<Radio />} label="Venta" />
+            </RadioGroup>
+          </FormControl>
+        </Box>
+        
         <Button type="submit" fullWidth variant="contained">
           Añadir
         </Button>

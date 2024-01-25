@@ -9,7 +9,10 @@ export const operationsSlice = createSlice({
       description: '',
       marketer_id: 0,
       client_id: 0,
-    },
+      type: 'compra',
+      amount: 0,
+      price: 0,
+    } as IOperationData,
     allOperations: [] as IOperationData[],
   },
   reducers: {

@@ -31,6 +31,13 @@ export const useForm = <T extends Object>(initialState: T) => {
     });
   };
 
+  const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      type: event.target.value
+    });
+  }
+
   const resetState = () => {
     setFormData(initialState);
   };
@@ -40,6 +47,7 @@ export const useForm = <T extends Object>(initialState: T) => {
     handleInputChange,
     handleSelectChange,
     handleSwitchChange,
+    handleRadioChange,
     resetState,
     ...formData
   };
