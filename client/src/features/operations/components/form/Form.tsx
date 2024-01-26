@@ -170,8 +170,11 @@ export const Form = () => {
         <Button type="submit" fullWidth variant="contained">
           Añadir
         </Button>
+        
+        <hr/>
 
-        <pre>{JSON.stringify(allOperations, null, 2)}</pre>
+        <h6> Dejo la siguiente información para que puedas ver los objetos creados de  forma interna.</h6>
+        <pre>{JSON.stringify(allOperations, null, 2)}</pre> 
       </form>
     </Container>
   );
