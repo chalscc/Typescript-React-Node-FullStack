@@ -158,3 +158,6 @@ He usado TypeORM como una capa de abstracción añadida entre dos interfaces, en
 
 Mientras que TypeORM ha sido la capa de abstracción que me ha permitido interactuar con la base de datos relacional, Express me ha permitido manejar las HTTP Request
 
+### Dotenv
+
+He usado esta librería para guardar variables de entorno en un .env
