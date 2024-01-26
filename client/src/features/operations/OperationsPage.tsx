@@ -1,10 +1,8 @@
-import { OperationsLayout } from './layout/MarketersLayout'
+import { OperationsLayout } from './layout/OperationsLayout'
 import { Form } from './components/form/Form'
 import { List } from './components/list/List'
 
-import './OperationsApp.css'
-
-function OperationsApp() {
+function OperationsPage() {
   
   return (
 
@@ -16,4 +14,4 @@ function OperationsApp() {
   )
 }
 
-export default OperationsApp
+export default OperationsPage

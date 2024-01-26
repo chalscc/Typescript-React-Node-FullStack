@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IOperationData } from '../../../interfaces';
+import { IMarketersData, IOperationData } from '../../../interfaces';
 
 export const operationsSlice = createSlice({
   name: 'operations',
@@ -11,11 +11,11 @@ export const operationsSlice = createSlice({
       marketer: {
         id: 0,
         name: '',
-      },
+      } as IMarketersData,
       client: {
         id: 0,
         name: '',
-      },
+      } as IMarketersData,
       type: 'compra',
       amount: 0,
       price: 0,

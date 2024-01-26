@@ -44,8 +44,6 @@ export const Form = () => {
   const saveOperation = async () => {
     const operation: IOperationData | undefined = await operationsService.addOne(formData);
 
-    console.log(operation)
-
     if (operation) dispatch(addOperation(operation));
   }
 

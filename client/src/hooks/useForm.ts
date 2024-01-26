@@ -18,11 +18,6 @@ export const useForm = (initialState: IOperationData) => {
   const handleSelectChange = (event: SelectChangeEvent<number>) => {
     const { name, value } = event.target;
 
-
-    console.log({
-      name, value
-    })
-
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: {
@@ -43,8 +38,6 @@ export const useForm = (initialState: IOperationData) => {
 
   const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-
-    console.log(name, value)
 
     setFormData({
       ...formData,
