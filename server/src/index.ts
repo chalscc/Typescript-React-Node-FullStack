@@ -4,12 +4,14 @@ import { Request, Response } from "express"
 import { AppDataSource } from "./data-source"
 import { Routes } from "./routes"
 import { Marketers } from "./entity/Marketers"
+import 'dotenv/config'
 
 AppDataSource.initialize().then(async () => {
 
   // create express app
   const app = express()
   const cors = require("cors");
+  require('dotenv').config()
 
   app.use(bodyParser.json())
 
@@ -28,7 +30,8 @@ AppDataSource.initialize().then(async () => {
     })
   })
 
-  app.listen(3000)
+  const port = process.env.PORT || 3000;
+  app.listen(port)
 
   // Inserto datos de ejemplo
   const marketers = ['Naturgy', 'Endesa', 'Repsol', 'Iberdrola', 'Axpo', 'Cepsa']
@@ -46,6 +49,6 @@ AppDataSource.initialize().then(async () => {
 
   });
 
-  console.log("Express server has started on port 3000. Open http://localhost:3000/marketers to see results")
+  console.log(`Express server has started on port ${port}. Open http://localhost:3000/marketers to see results`)
 
 }).catch(error => console.log(error))
