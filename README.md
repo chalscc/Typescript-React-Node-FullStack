@@ -1,38 +1,139 @@
-# React + TypeScript + Vite
+# Despliegue del proyecto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- El proyecto ha sido desarrollado haciendo uso de npm como gestor de paquetes
+- Se ha desplegado React + Typescript con Vite
+- Se ha desplegado Node + Typescript con TypeORM
 
-Currently, two official plugins are available:
+Para arrancar el proyecto:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. React: Dentro de la carpeta `/client`
+- Ejecutar el comando `npm install` para instalar las dependencias
+- Ejecutar el comando `npm run dev` para iniciar el proyecto
 
-## Expanding the ESLint configuration
+2. Node: Dentro de la carpeta `/server`
+- Ejecutar el comando `npm install` para instalar las dependencias
+- Ejecutar el comando `npm run start` para iniciar el proyecto
+- El servidor se ejecuta en el puerto 3000
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
+3. La configuración de la base de datos de PostrgreSQL se encuentra en `/server/src/data-source.ts`.
 
 ```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+export const AppDataSource = new DataSource({
+    type: "postgres",
+    host: "localhost",
+    port: 5432,
+    username: "postgres",
+    password: "test",
+    database: "sercomgas",
+    synchronize: true,
+    logging: false,
+    entities: [Marketers, Operations],
+    migrations: [],
+    subscribers: [],
+})
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- El servidor ha sido desplegado en localhost, puerto por defecto 5432, nombre de la base de datos `sercomgas`
+- Ajustar las opciones de usuario y contraseña
+- El esquema de BBDD se debería generar automaticamente gracias a su definición en las entidades `/server/src/entity`
+- Puedes encontrar una copia de en el database dump generado en `/bdd/bdd.sql`
+- Se generarán datos para la entity `Marketers` de forma automatica y el usuario podra añadir `Operations` mediante la interfaz gráfica.
 
-# Awesome Project Build with TypeORM
+# Tomas de decisión
 
-Steps to run this project:
+## Client
 
-1. Run `npm i` command
-2. Setup database settings inside `data-source.ts` file
-3. Run `npm start` command
+### Arquitectura por funcionalidades
+
+src/
+
+Componentes globalmente utilizados en toda la aplicación
+|-- components/
+|   |-- ui/
+|   |   |--- Navbar.tsx
+
+Configuración, en este caso podemos ver la configuración de la ruta para las Http request
+|-- config/
+|   |-- http-common.ts
+
+Funcionalidades de la aplicación separadas por páginas, el objetivo es encapsular las funcionalidades
+|-- features/
+|   |-- operations/
+|   |   |-- components/
+|   |   |   |-- form/
+|   |   |   |   |-- Form.tsx
+|   |   |   |-- list/
+|   |   |   |   |-- List.tsx
+|   |   |-- layout/
+|   |   |   |-- OperationsLayout.tsx
+|   |   |-- OperationsPage.tsx
+|   |-- marketers/
+
+Custom hooks
+|-- hooks/
+|   |-- useForm.ts
+|   |-- useRedux.ts
+
+|-- interfaces/
+|   |-- MarketersData.ts
+|   |-- OperationData.ts
+|   |-- DeleteResponse.ts
+
+|-- router/
+|   |-- AppRouter.tsx
+
+Servicios que generan la llamada Http mediante Axios
+|-- services/
+|   |-- marketersService.tsx
+|   |-- operationsService.tsx
+
+Store donde aplicamos el patrón de diseño Redux
+|-- store/
+|   |-- slices/
+|   |   |-- marketers/
+|   |   |   |-- marketeresSlice.ts
+|   |   |-- operations/
+|   |   |   |-- operationsSlice.ts
+|   |-- store.ts
+
+|-- main.tsx
+
+### Librerías de estilo
+Los estilos han sido realizados mediante @emotion, @mui y @bootstrap
+
+### API Rest
+Las Http Request han sido realizadas mediante @axios
+
+### Gestión de estados
+La gestión de estados ha sido realizada mediante @react-redux siguiendo el patrón de diseño de Redux
+
+## Server
+
+### Arquitectura basada en controladores
+src/
+
+En los controladores ejecutamos la lógica de la llamada a la base de datos así como devolvemos la información al cliente
+|-- controller/
+|   |-- MarketersController.ts
+|   |-- OperationsController.ts
+
+Definimos la estructura del esquema de cada entidad
+|-- entity/
+|   |-- Marketers.ts
+|   |-- Operations.ts
+
+En este caso he establecido la relación:
+1. Un marketer puede tener muchas operaciones
+
+2. Una operación solo puede tener un marketer
+3. Una operación solo puede tener un cliente
+
+
+Establecemos la configuración de la base de datos
+|-- data-source.ts
+
+|-- index.ts
+
+Establecemos los endpoint para recibir las HttpRequest
+|-- routes.ts
+
