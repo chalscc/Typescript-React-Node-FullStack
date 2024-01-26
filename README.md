@@ -101,11 +101,22 @@ Store donde aplicamos el patrón de diseño Redux
 ### Librerías de estilo
 Los estilos han sido realizados mediante @emotion, @mui y @bootstrap
 
+Me han permitido de forma rapida y sencilla la importación y utilización de componentes controlados y estilos predefinidos.
+
 ### API Rest
 Las Http Request han sido realizadas mediante @axios
 
+Cuando el controlador de los componentes funcionales es disparado por una interacción con la interfaz de usuario realizao las modificaciones en la base de datos mediante Axios, he implementado 3 tipos diferentes de HTTP Request haciendo uso de los metodos POST, GET y DELETE.
+
 ### Gestión de estados
-La gestión de estados ha sido realizada mediante @react-redux siguiendo el patrón de diseño de Redux
+La gestión de estados ha sido realizada mediante @react-redux siguiendo el patrón de diseño Redux.
+
+He separado el estado global en 'slices' para que cada una de estas slices sean gestionadas por reducers especificos.
+
+### Enrutamiento
+Enrutamiento realizado con @react-router-dom
+
+He hecho una pequeña demostración de como haría un enrutamiento con React Router manteniendo el principio de SPA
 
 ## Server
 
@@ -138,3 +149,12 @@ Establecemos la configuración de la base de datos
 Establecemos los endpoint para recibir las HttpRequest
 |-- routes.ts
 ```
+
+### ORM: TypeORM
+
+He usado TypeORM como una capa de abstracción añadida entre dos interfaces, en este caso Node.js y PostreSQL, me ha permitido mapear objetos de la estructura de la base de datos relacional y transpilarlos a objetos javascript comprensibles por Node.js
+
+### Express
+
+Mientras que TypeORM ha sido la capa de abstracción que me ha permitido interactuar con la base de datos relacional, Express me ha permitido manejar las HTTP Request
+
