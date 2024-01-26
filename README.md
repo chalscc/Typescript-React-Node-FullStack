@@ -44,7 +44,7 @@ export const AppDataSource = new DataSource({
 ## Client
 
 ### Arquitectura por funcionalidades
-
+```
 src/
 
 Componentes globalmente utilizados en toda la aplicación
@@ -97,7 +97,7 @@ Store donde aplicamos el patrón de diseño Redux
 |   |-- store.ts
 
 |-- main.tsx
-
+```
 ### Librerías de estilo
 Los estilos han sido realizados mediante @emotion, @mui y @bootstrap
 
@@ -110,6 +110,7 @@ La gestión de estados ha sido realizada mediante @react-redux siguiendo el patr
 ## Server
 
 ### Arquitectura basada en controladores
+```
 src/
 
 En los controladores ejecutamos la lógica de la llamada a la base de datos así como devolvemos la información al cliente
@@ -136,4 +137,4 @@ Establecemos la configuración de la base de datos
 
 Establecemos los endpoint para recibir las HttpRequest
 |-- routes.ts
-
+```
