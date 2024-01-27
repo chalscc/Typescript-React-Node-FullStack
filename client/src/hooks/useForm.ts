@@ -36,6 +36,9 @@ export const useForm = (initialState: IOperationData) => {
     });
   };
 
+  /* Las siguiente función es idéntica a handleInputChange, seria posible unificar ambas funciones,
+  pero he decidido mantenerlas separadas siguiendo el principio SOLID de responsabilidad única. */
+
   const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 

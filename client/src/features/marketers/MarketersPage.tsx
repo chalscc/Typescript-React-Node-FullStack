@@ -1,7 +1,5 @@
-const MarketersPage = () => {
+export const MarketersPage = () => {
   return (
-    <div>MarketersPage</div>
+    <div>MarketersPage, ejemplo creado para mostrar el enrutamiento realizado con @react-router-dom</div>
   )
 }
-
-export default MarketersPage

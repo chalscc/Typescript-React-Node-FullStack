@@ -2,7 +2,7 @@ import { OperationsLayout } from './layout/OperationsLayout'
 import { Form } from './components/form/Form'
 import { List } from './components/list/List'
 
-function OperationsPage() {
+export function OperationsPage() {
   
   return (
 
@@ -13,5 +13,3 @@ function OperationsPage() {
 
   )
 }
-
-export default OperationsPage

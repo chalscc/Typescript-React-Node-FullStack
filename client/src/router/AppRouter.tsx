@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom"
-import OperationsPage from "../features/operations/OperationsPage"
-import MarketersPage from "../features/marketers/MarketersPage"
+import { OperationsPage, MarketersPage } from "../features"
 import { Navbar } from "../components/ui/Navbar"
 
 export const AppRouter = () => {
