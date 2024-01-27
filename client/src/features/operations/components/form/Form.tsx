@@ -1,11 +1,12 @@
-import { IOperationData, IMarketersData } from '../../../../interfaces';
-import { useAppSelector, useAppDispatch, useForm } from '../../../../hooks'
-import { addOperation } from '../../../../store/slices/operations/operationsSlice';
-import { TextField, Container, Typography, Button, FormControl, InputLabel, Select, MenuItem, InputAdornment, FormControlLabel, RadioGroup, Radio, Box } from '@mui/material';
 import { useEffect } from 'react';
-import MarketersService from '../../../../services/marketersService';
+
+import { TextField, Container, Typography, Button, FormControl, InputLabel, Select, MenuItem, InputAdornment, FormControlLabel, RadioGroup, Radio, Box } from '@mui/material';
+
+import { IOperationData, IMarketersData } from '../../../../interfaces';
+import { MarketersService, OperationsService } from '../../../../services';
+import { useAppSelector, useAppDispatch, useForm } from '../../../../hooks';
 import { setMarketers } from '../../../../store/slices/marketers/marketersSlice';
-import operationsService from '../../../../services/operationsService';
+import { addOperation } from '../../../../store/slices/operations/operationsSlice';
 
 export const Form = () => {
 
@@ -42,7 +43,7 @@ export const Form = () => {
 
 
   const saveOperation = async () => {
-    const operation: IOperationData | undefined = await operationsService.addOne(formData);
+    const operation: IOperationData | undefined = await OperationsService.addOne(formData);
 
     if (operation) dispatch(addOperation(operation));
   }

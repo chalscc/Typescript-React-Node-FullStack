@@ -14,8 +14,6 @@ const getAll = async () => {
   }
 };
 
-const MarketersService = {
+export const MarketersService = {
   getAll,
 };
-
-export default MarketersService;

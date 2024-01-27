@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { removeOperation, setOperations } from '../../../../store/slices/operations/operationsSlice';
 import { useEffect } from 'react';
 import { IDeleteResponse, IOperationData } from '../../../../interfaces';
-import operationsService from '../../../../services/operationsService';
+import { OperationsService } from '../../../../services';
 
 
 export const List = () => {
@@ -20,12 +20,12 @@ export const List = () => {
   }, []);
 
   const getOperations = async () => {
-    const operations: IOperationData[] | undefined = await operationsService.getAll();
+    const operations: IOperationData[] | undefined = await OperationsService.getAll();
     if (operations) dispatch(setOperations(operations));
   }
 
   const deleteOperation = async (id: number) => {
-    const operation: IDeleteResponse | undefined = await operationsService.deleteOne(id);
+    const operation: IDeleteResponse | undefined = await OperationsService.deleteOne(id);
     if (operation && operation.success) dispatch(removeOperation(operation.id));
   }
 

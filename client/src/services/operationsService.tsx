@@ -36,10 +36,8 @@ const deleteOne = async (id: number) => {
   }
 }
 
-const MarketersService = {
+export const OperationsService = {
   getAll,
   addOne,
   deleteOne
 };
-
-export default MarketersService;
