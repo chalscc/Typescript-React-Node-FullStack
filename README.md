@@ -36,8 +36,13 @@ export const AppDataSource = new DataSource({
 - El servidor ha sido desplegado en localhost, puerto por defecto 5432, nombre de la base de datos `sercomgas`
 - Ajustar las opciones de usuario y contraseña
 - El esquema de BBDD se debería generar automaticamente gracias a su definición en las entidades `/server/src/entity`
-- Puedes encontrar una copia de en el database dump generado en `/bdd/bdd.sql`
-- Se generarán datos para la entity `Marketers` de forma automatica y el usuario podra añadir `Operations` mediante la interfaz gráfica.
+
+- Si deseas importar la base de datos, puedes encontra una copia en `/bdd/sercomgas.sql`, para importarla:
+1. Crear la base de datos `sercomgas`
+2. Click derecho en la base de datos `sercomgas` >> Seleccionar `Restore...`
+3. Formato `Custom or Tar` y seleccionar nuestro filename `sercomgas.sql`
+
+- En caso contrario, se generarán datos para la entity `Marketers` de forma automatica y el usuario podra añadir `Operations` mediante la interfaz gráfica.
 
 # Tomas de decisión
 
@@ -98,6 +103,9 @@ Store donde aplicamos el patrón de diseño Redux
 
 |-- main.tsx
 ```
+
+Por preferencia suelo crear archivos de barril `index.ts` para agilizar el proceso de importación/exportación de los diferentes componentes funcionales entre modulos
+
 ### Librerías de estilo
 Los estilos han sido realizados mediante @emotion, @mui y @bootstrap
 
@@ -108,15 +116,17 @@ Las Http Request han sido realizadas mediante @axios
 
 Cuando el controlador de los componentes funcionales es disparado por una interacción con la interfaz de usuario realizao las modificaciones en la base de datos mediante Axios, he implementado 3 tipos diferentes de HTTP Request haciendo uso de los metodos POST, GET y DELETE.
 
+En `/client/src/services` podrás encontrar los diferentes servicios asociados a Operations y Marketers
+
 ### Gestión de estados
 La gestión de estados ha sido realizada mediante @react-redux siguiendo el patrón de diseño Redux.
 
-He separado el estado global en 'slices' para que cada una de estas slices sean gestionadas por reducers especificos.
+He separado el estado global en slices para que cada una de estas slices sean gestionadas por reducers especificos, de esta forma segregamos las diferentes funcionalidades aplicables a los estados.
 
 ### Enrutamiento
 Enrutamiento realizado con @react-router-dom
 
-He hecho una pequeña demostración de como haría un enrutamiento con React Router manteniendo el principio de SPA
+He hecho una pequeña demostración de como haría un enrutamiento con React Router manteniendo el principio de SPA.
 
 ## Server
 
