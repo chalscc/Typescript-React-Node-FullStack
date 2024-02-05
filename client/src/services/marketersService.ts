@@ -3,7 +3,7 @@ import { IMarketersData } from "../interfaces";
 import { AxiosResponse } from 'axios';
 
 
-const getAll = async () => {
+const getAll = async (): Promise<IMarketersData[] | undefined> => {
   try {
     const response: AxiosResponse = await http.get('/marketers');
     const responseData: IMarketersData[] = response.data;

@@ -3,7 +3,7 @@ import { IDeleteResponse, IOperationData } from "../interfaces";
 import { AxiosResponse } from 'axios';
 
 
-const getAll = async () => {
+const getAll = async (): Promise<IOperationData[] | undefined> => {
   try {
     const response: AxiosResponse = await http.get('/operations');
     const responseData: IOperationData[] = response.data;
@@ -14,7 +14,7 @@ const getAll = async () => {
   }
 };
 
-const addOne = async (operation: IOperationData) => {
+const addOne = async (operation: IOperationData): Promise<IOperationData | undefined> => {
   try {
     const response: AxiosResponse = await http.post('/operations', operation);
     const responseData: IOperationData = response.data;
@@ -25,7 +25,7 @@ const addOne = async (operation: IOperationData) => {
   }
 }
 
-const deleteOne = async (id: number) => {
+const deleteOne = async (id: number): Promise<IDeleteResponse | undefined> => {
   try {
     const response: AxiosResponse = await http.delete(`/operations/${id}`);
     const responseData: IDeleteResponse = response.data;
