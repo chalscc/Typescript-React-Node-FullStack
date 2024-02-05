@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 
-import { TextField, Container, Typography, Button, FormControl, InputLabel, Select, MenuItem, InputAdornment, FormControlLabel, RadioGroup, Radio, Box } from '@mui/material';
+import { TextField, Container, Typography, Button, FormControl, InputAdornment, FormControlLabel, RadioGroup, Radio, Box } from '@mui/material';
 
 import { IOperationData, IMarketersData } from '../../../../interfaces';
 import { MarketersService, OperationsService } from '../../../../services';
 import { useAppSelector, useAppDispatch, useForm } from '../../../../hooks';
 import { setMarketers } from '../../../../store/slices/marketers/marketersSlice';
 import { addOperation } from '../../../../store/slices/operations/operationsSlice';
+import { SelectComponent } from './components/SelectComponent';
 
 export const Form = () => {
 
-  const { operation, allOperations } = useAppSelector((state) => state.operations)
-  const { allMarketers } = useAppSelector((state) => state.marketers)
+  const { operation, allOperations } = useAppSelector((state) => state.operations)  
   const dispatch = useAppDispatch()
 
   const {
@@ -113,44 +113,10 @@ export const Form = () => {
             if (forbiddenKeys.includes(event.key)) event.preventDefault();
           }}
         />
+       
+        <SelectComponent handleSelectChange={handleSelectChange} inputId={formData.marketer.id} name='marketer' label='Marketer' />
 
-        <FormControl fullWidth sx={{ marginBottom: '8px' }}>
-          <InputLabel id="id-label-marketer">Marketer</InputLabel>
-          <Select
-            labelId="id-label-marketer"
-            id="id-select-marketer"
-            required
-            value={formData.marketer.id !== 0 ? formData.marketer.id : ""}
-            label="Marketer"
-            name='marketer'
-            onChange={handleSelectChange}
-          >
-            {allMarketers.map(({ id, name }) => (
-              <MenuItem key={id} value={id}>
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <FormControl fullWidth sx={{ marginBottom: '8px' }}>
-          <InputLabel id="id-label-client">Cliente</InputLabel>
-          <Select
-            labelId="id-label-client"
-            id="id-select-client"
-            name='client'
-            required
-            value={formData.client.id !== 0 ? formData.client.id : ""}
-            label="Cliente"
-            onChange={handleSelectChange}
-          >
-            {allMarketers.map(({ id, name }) => (
-              <MenuItem key={id} value={id} >
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <SelectComponent handleSelectChange={handleSelectChange} inputId={formData.client.id} name='client' label='Cliente' />
 
         <Box
           display='flex'
@@ -171,11 +137,11 @@ export const Form = () => {
         <Button type="submit" fullWidth variant="contained">
           Añadir
         </Button>
-        
-        <hr/>
+
+        <hr />
 
         <h6> Dejo la siguiente información para que puedas ver los objetos creados de  forma interna.</h6>
-        <pre>{JSON.stringify(allOperations, null, 2)}</pre> 
+        <pre>{JSON.stringify(allOperations, null, 2)}</pre>
       </form>
     </Container>
   );
