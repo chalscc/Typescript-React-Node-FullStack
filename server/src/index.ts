@@ -1,33 +1,45 @@
+import { Express, Request, Response, NextFunction } from "express";
 import * as express from "express"
 import * as bodyParser from "body-parser"
-import { Request, Response } from "express"
+import 'dotenv/config'
+
 import { AppDataSource } from "./data-source"
 import { Routes } from "./routes"
 import { Marketers } from "./entity/Marketers"
-import 'dotenv/config'
+import { Route } from "./interfaces/RouteData"
 
 AppDataSource.initialize().then(async () => {
 
   // create express app
-  const app = express()
+  const app: Express = express();
   const cors = require("cors");
   require('dotenv').config()
 
   app.use(bodyParser.json())
-
   app.use(cors());
 
   // register express routes from defined application routes
-  Routes.forEach(route => {
-    (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
-      const result = (new (route.controller as any))[route.action](req, res, next)
-      if (result instanceof Promise) {
-        result.then(result => result !== null && result !== undefined ? res.send(result) : undefined)
+  Routes.forEach((route: Route) => {
+    app[route.method as keyof Express](route.route, async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const ControllerClass = route.controller;
+        const controllerInstance = new ControllerClass();
 
-      } else if (result !== null && result !== undefined) {
-        res.json(result)
+        const result = await controllerInstance[route.action](req, res, next);
+
+        if (result !== null && result !== undefined) {
+          if (result instanceof Promise) {
+            res.send(await result);
+          } else {
+            res.json(result);
+          }
+        } else {
+          next();
+        }
+      } catch (error) {
+        next(error);
       }
-    })
+    });
   })
 
   const port = process.env.PORT || 3000;
