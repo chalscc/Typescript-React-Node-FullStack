@@ -9,7 +9,7 @@ export const Navbar = () => {
         className="navbar-brand"
         to="/"
       >
-        Sercomgas
+        Prueba técnica
       </Link>
 
       <div className="navbar-collapse">
