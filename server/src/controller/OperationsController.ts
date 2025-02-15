@@ -1,6 +1,7 @@
 import { AppDataSource } from "../data-source"
 import { NextFunction, Request, Response } from "express"
 import { Operations } from "../entity/Operations"
+import { Worker } from "worker_threads"
 
 export class OperationsController {
 
@@ -21,6 +22,12 @@ export class OperationsController {
     // Primero la inserto
     const { id } = await this.operationsRepository.save(operation);
 
+    const worker = new Worker("./src/heavyProcess.ts");
+
+    worker.unref(); // El worker se ejecuta en segundo plano
+
+    worker.on("error", (err) => console.error("Error en el worker:", err));
+
     // Luego la busco por que quiero sus relaciones
     return this.operationsRepository.findOne({ where:  {id} , relations: ["marketer", "client"]});
   }
@@ -29,6 +36,8 @@ export class OperationsController {
     const id = parseInt(request.params.id)
 
     let operationToRemove = await this.operationsRepository.findOneBy({ id })
+
+    console.log('_______ REMOVING OPERATION _________')
 
     if (!operationToRemove) {
       return { msg: "this operation does not exist", success: false, id }
