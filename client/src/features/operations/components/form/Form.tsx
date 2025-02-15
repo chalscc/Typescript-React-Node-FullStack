@@ -77,8 +77,7 @@ export const Form = () => {
           name="description"
           value={description}
           onChange={handleInputChange}
-        />
-
+      />
 
         <TextField
           sx={{ marginBottom: '8px' }}
