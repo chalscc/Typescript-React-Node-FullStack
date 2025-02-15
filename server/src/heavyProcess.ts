@@ -9,7 +9,7 @@ setInterval(() => console.log('Devuelvo el control al main thread'), 500);
 
 function *calcularProcesoPesado() {
   console.log('Entro al calculo pesado')
-    for (let i = 0; i < 100000; i++) {
+    for (let i = 0; i < 10000; i++) {
 
       if(i % 1000 === 0) yield proceso(i)
 
