@@ -28,6 +28,7 @@ export class OperationsController {
 
     worker.on("message", (msg) => {
       console.log("Worker finalizado:", msg);
+      // Must save on db that job has finished and then apply polling or websocket on front
       worker.terminate();
     });
 
