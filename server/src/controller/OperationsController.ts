@@ -26,6 +26,11 @@ export class OperationsController {
 
     worker.unref(); // El worker se ejecuta en segundo plano
 
+    worker.on("message", (msg) => {
+      console.log("Worker finalizado:", msg);
+      worker.terminate();
+    });
+
     worker.on("error", (err) => console.error("Error en el worker:", err));
 
     // Luego la busco por que quiero sus relaciones
