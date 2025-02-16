@@ -1,4 +1,4 @@
-const { parentPort } = require("worker_threads");
+const { parentPort, workerData } = require("worker_threads");
 
 // Source:
 // https://stackoverflow.com/questions/15317464/how-to-have-heavy-processing-operations-done-in-node-js
@@ -9,7 +9,7 @@ setInterval(() => console.log('Devuelvo el control al main thread'), 500);
 
 function *calcularProcesoPesado() {
   console.log('Entro al calculo pesado')
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < workerData; i++) {
 
       if(i % 1000 === 0) yield proceso(i)
 

@@ -22,7 +22,9 @@ export class OperationsController {
     // Primero la inserto
     const { id } = await this.operationsRepository.save(operation);
 
-    const worker = new Worker("./src/heavyProcess.ts");
+    const worker = new Worker("./src/heavyProcess.ts", {
+      workerData: 10000
+    });
 
     worker.unref(); // El worker se ejecuta en segundo plano
 
