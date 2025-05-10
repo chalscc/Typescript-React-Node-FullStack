@@ -5,6 +5,7 @@ import { Navbar } from "../components/ui/Navbar"
 export const AppRouter = () => {
   console.log('Test in router')
   console.log('Test 2')
+  console.log('Test 3')
   return (
     <>
       <Navbar />
