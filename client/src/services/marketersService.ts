@@ -17,3 +17,4 @@ const getAll = async (): Promise<IMarketersData[] | undefined> => {
 export const MarketersService = {
   getAll,
 };
+
